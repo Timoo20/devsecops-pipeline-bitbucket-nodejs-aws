@@ -1,7 +1,6 @@
 
 # Shift Left, Ship Secure: Building a Bulletproof DevSecOps Pipeline
 
-**Repository Name**: `devsecops-pipeline-bitbucket-nodejs-aws`  
 **Author**: [Tim Murkomen](https://www.linkedin.com/in/timmurkomen)  
 **License**: MIT  
 
@@ -56,7 +55,7 @@ Below is a breakdown of each step in the pipeline, including its purpose and cor
       - npx eslint . --ext .js,.ts --format table || true
 ````
 
-*Why*: Enforces best practices and detects common mistakes that could become vulnerabilities.
+Enforces best practices and detects common mistakes that could become vulnerabilities.
 
 ---
 
@@ -75,7 +74,7 @@ Below is a breakdown of each step in the pipeline, including its purpose and cor
       SONAR_HOST_URL: ${SONAR_HOST_URL}
 ```
 
-*Why*: Static analysis scans the application codebase without execution, catching logic errors and insecure patterns.
+Static analysis scans the application codebase without execution, catching logic errors and insecure patterns.
 
 ---
 
@@ -91,7 +90,7 @@ Below is a breakdown of each step in the pipeline, including its purpose and cor
       - gitleaks detect --source=. --redact=100 --verbose || true
 ```
 
-*Why*: Prevents credentials leakage — a common and dangerous DevOps mistake.
+Prevents credentials leakage — a common and dangerous DevOps mistake.
 
 ---
 
@@ -107,7 +106,7 @@ Below is a breakdown of each step in the pipeline, including its purpose and cor
       - docker save ${IMAGE_NAME}:staging -o image_staging.tar
 ```
 
-*Why*: Containerizes the app for consistent behavior across all environments.
+Containerizes the app for consistent behavior across all environments.
 
 ---
 
@@ -123,7 +122,7 @@ Below is a breakdown of each step in the pipeline, including its purpose and cor
       - trivy fs --exit-code 0 --ignore-unfixed --severity CRITICAL,HIGH --scanners vuln,license . || true
 ```
 
-*Why*: Detects vulnerable libraries before the app is packaged.
+Detects vulnerable libraries before the app is packaged.
 
 ---
 
@@ -141,7 +140,7 @@ Below is a breakdown of each step in the pipeline, including its purpose and cor
       - trivy image --exit-code 0 --ignore-unfixed --severity CRITICAL,HIGH ${IMAGE_NAME}:staging || true
 ```
 
-*Why*: Validates that the final deployable image is secure.
+Validates that the final deployable image is secure.
 
 ---
 
@@ -158,7 +157,7 @@ Below is a breakdown of each step in the pipeline, including its purpose and cor
       - docker push ${ECR_REPO_URI}:staging
 ```
 
-*Why*: Makes the image available to ECS for deployment.
+Makes the image available to ECS for deployment.
 
 ---
 
@@ -178,7 +177,7 @@ Below is a breakdown of each step in the pipeline, including its purpose and cor
           TASK_DEFINITION: "node-task"
 ```
 
-*Why*: Enables automated testing of new features in a controlled environment.
+Enables automated testing of new features in a controlled environment.
 
 ---
 
@@ -199,7 +198,7 @@ Below is a breakdown of each step in the pipeline, including its purpose and cor
           TASK_DEFINITION: "node-task"
 ```
 
-*Why*: Adds a human approval gate to protect production from bad pushes.
+Adds a human approval gate to protect production from bad pushes.
 
 ---
 
